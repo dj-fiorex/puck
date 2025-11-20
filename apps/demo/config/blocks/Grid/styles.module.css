@@ -1,11 +1,21 @@
-.Grid {
-  display: flex;
-  flex-direction: column;
-  width: auto;
+.grid {
+  display: grid;
+  gap: var(--mobile-gap, 0);
+  grid-template-columns: repeat(max(var(--mobile-num-columns, 1), 1), 1fr);
 }
 
-@media (min-width: 768px) {
-  .Grid {
-    display: grid;
+/* tablet */
+@media (min-width: 641px) {
+  .grid {
+    gap: var(--tablet-gap, 0);
+    grid-template-columns: repeat(max(var(--tablet-num-columns, 1), 1), 1fr);
+  }
+}
+
+/* desktop */
+@media (min-width: 1025px) {
+  .grid {
+    gap: var(--gap, 0);
+    grid-template-columns: repeat(max(var(--num-columns, 1), 1), 1fr);
   }
 }

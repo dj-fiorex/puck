@@ -1,0 +1,76 @@
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/scrollbar';
+
+/* Swiper Navigation Buttons */
+.swiper-button {
+  position: absolute;
+  z-index: 10;
+}
+
+.swiper-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Outside placement */
+.swiper-button-prev-outside {
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next-outside {
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Inside placement */
+.swiper-button-prev-inside {
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next-inside {
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Bottom placement */
+.swiper-button-prev-bottom {
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-3rem);
+}
+
+.swiper-button-next-bottom {
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(3rem);
+}
+
+/* Bottom Left placement */
+.swiper-button-prev-bottom-left {
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.swiper-button-next-bottom-left {
+  bottom: 1rem;
+  left: 4rem;
+}
+
+/* Bottom Right placement */
+.swiper-button-prev-bottom-right {
+  bottom: 1rem;
+  right: 4rem;
+}
+
+.swiper-button-next-bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+}

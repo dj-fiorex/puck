@@ -1,0 +1,112 @@
+/* CSS Custom Properties for theming */
+.skin-button {
+  /* Button responsive variables - Desktop */
+  --button-background-color: var(--primary);
+  --button-text-color: var(--primary-foreground);
+  --button-font-family: inherit;
+  --button-font-size: 16px;
+  --button-font-weight: normal;
+  --button-font-style: normal;
+  --button-padding: 0.5rem 1rem;
+  --button-margin: 0;
+  --button-border: 1px solid transparent;
+  --button-border-radius: 0.375rem;
+
+  --button-text-decoration-line: none;
+  --button-text-decoration-style: solid;
+  --button-text-decoration-thickness: auto;
+  --button-text-underline-offset: auto;
+
+  --button-position: static;
+  --button-display: inline-flex;
+  --button-width: auto;
+
+  /* Button responsive variables - Mobile */
+  --mobile-button-background-color: var(--primary);
+  --mobile-button-text-color: var(--primary-foreground);
+  --mobile-button-font-family: inherit;
+  --mobile-button-font-size: 14px;
+  --mobile-button-font-weight: normal;
+  --mobile-button-font-style: normal;
+  --mobile-button-padding: 0.4rem 0.8rem;
+  --mobile-button-margin: 0;
+  --mobile-button-border: 1px solid transparent;
+  --mobile-button-border-radius: 0.375rem;
+
+  --mobile-button-text-decoration-line: none;
+  --mobile-button-text-decoration-style: solid;
+  --mobile-button-text-decoration-thickness: auto;
+  --mobile-button-text-underline-offset: auto;
+
+  --mobile-button-position: static;
+  --mobile-button-display: inline-flex;
+  --mobile-button-width: auto;
+}
+
+.button {
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.skin-button {
+  display: var(--mobile-button-display);
+  width: var(--mobile-button-width);
+  border: var(--mobile-button-border);
+  background-color: var(--mobile-button-background-color);
+  color: var(--mobile-button-text-color);
+  font-family: var(--mobile-button-font-family);
+  font-size: var(--mobile-button-font-size);
+  font-weight: var(--mobile-button-font-weight);
+  font-style: var(--mobile-button-font-style);
+  padding: var(--mobile-button-padding);
+  margin: var(--mobile-button-margin);
+  border: var(--mobile-button-border);
+  border-radius: var(--mobile-button-border-radius);
+  text-shadow: var(--mobile-button-text-shadow);
+  text-decoration-line: var(--mobile-button-text-decoration-line);
+  text-decoration-style: var(--mobile-button-text-decoration-style);
+  text-decoration-thickness: var(--mobile-button-text-decoration-thickness);
+  text-underline-offset: var(--mobile-button-text-underline-offset);
+  position: var(--mobile-button-position);
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .button {
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  /* Responsive button class that uses CSS variables */
+  .skin-button {
+    display: var(--button-display);
+    width: var(--button-width);
+    border: var(--button-border);
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    font-family: var(--button-font-family);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    font-style: var(--button-font-style);
+    padding: var(--button-padding);
+    margin: var(--button-margin);
+    border: var(--button-border);
+    border-radius: var(--button-border-radius);
+    text-shadow: var(--button-text-shadow);
+    text-decoration-line: var(--button-text-decoration-line);
+    text-decoration-style: var(--button-text-decoration-style);
+    text-decoration-thickness: var(--button-text-decoration-thickness);
+    text-underline-offset: var(--button-text-underline-offset);
+    position: var(--button-position);
+  }
+}

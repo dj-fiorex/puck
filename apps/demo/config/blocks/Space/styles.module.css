@@ -1,14 +1,32 @@
-.Space {
+.space {
   display: block;
-  height: var(--size);
-  width: var(--size);
+  height: var(--mobile-size);
+  width: var(--mobile-size);
 }
 
-.Space--vertical {
+.spaceVertical {
   width: 100%;
+  height: var(--mobile-size);
 }
 
-.Space--horizontal {
-  width: var(--size);
+.spaceHorizontal {
+  width: var(--mobile-size);
   height: 100%;
+}
+
+@media (min-width: 768px) {
+  .space {
+    height: var(--size);
+    width: var(--size);
+  }
+
+  .spaceVertical {
+    width: 100%;
+    height: var(--size);
+  }
+
+  .spaceHorizontal {
+    width: var(--size);
+    height: 100%;
+  }
 }

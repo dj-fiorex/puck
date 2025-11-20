@@ -4,6 +4,8 @@
     "strict": true,
     "plugins": [{ "name": "next" }],
     "paths": {
+      "@/app": ["./app/"],
+      "@/app/*": ["./app/*"],
       "@/core": ["../../packages/core"],
       "@/core/*": ["../../packages/core/*"],
       "@measured/puck": ["../../packages/core"],

@@ -1,0 +1,52 @@
+/* mobile */
+.layoutContainer {
+  display: block;
+
+  padding-top: var(--mobile-padding-top);
+  padding-bottom: var(--mobile-padding-bottom);
+  padding-left: var(--mobile-padding-left);
+  padding-right: var(--mobile-padding-right);
+
+  margin-top: var(--mobile-margin-top);
+  margin-bottom: var(--mobile-margin-bottom);
+  margin-left: var(--mobile-margin-left);
+  margin-right: var(--mobile-margin-right);
+
+  flex-grow: var(--mobile-grow);
+  align-self: var(--mobile-align-self);
+  position: var(--mobile-position);
+  z-index: var(--mobile-z-index);
+  grid-column: var(--mobile-span-col);
+  grid-row: var(--mobile-span-row);
+  order: var(--mobile-order);
+
+  max-width: 100%;
+  width: var(--mobile-width);
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .layoutContainer {
+    display: block;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    padding-left: var(--padding-left);
+    padding-right: var(--padding-right);
+
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    margin-left: var(--margin-left);
+    margin-right: var(--margin-right);
+
+    flex-grow: var(--grow);
+    align-self: var(--align-self);
+    position: var(--position);
+    z-index: var(--z-index);
+    grid-column: var(--span-col);
+    grid-row: var(--span-row);
+    order: var(--order);
+
+    max-width: 100%;
+    width: var(--width);
+  }
+}

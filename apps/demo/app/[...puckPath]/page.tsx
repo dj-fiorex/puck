@@ -1,6 +1,7 @@
 import resolvePuckPath from "../../lib/resolve-puck-path";
 import { Metadata } from "next";
-import Client from "./client";
+import PageForm from "./custom";
+// import Client from "./client";
 export async function generateMetadata({
   params,
 }: {
@@ -26,7 +27,18 @@ export default async function Page({
   params: Promise<{ framework: string; uuid: string; puckPath: string[] }>;
 }) {
   const { puckPath } = await params;
+
+  if (puckPath.find((part) => part === "test")) {
+    return <PageForm />
+  }
+
   const { isEdit, path } = resolvePuckPath(puckPath);
 
-  return <Client isEdit={isEdit} path={path} />;
+  return (
+    <div>
+      Demo Page for path: {path} (isEdit: {isEdit ? "true" : "false"})
+    </div>
+  );
+
+  // return <Client isEdit={isEdit} path={path} />;
 }

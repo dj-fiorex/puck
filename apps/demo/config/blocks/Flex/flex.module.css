@@ -1,0 +1,53 @@
+/* MOBILE */
+.flexSectionContainer {
+  background-image: var(--mobile-background-image);
+  background-color: var(--mobile-background-color);
+  aspect-ratio: var(--mobile-aspect-ratio);
+  cursor: var(--mobile-cursor);
+  width: var(--mobile-width);
+  height: var(--mobile-height);
+  margin: var(--mobile-margin);
+  border: var(--mobile-border);
+  border-radius: var(--mobile-border-radius);
+  background-size: var(--mobile-background-size);
+  background-position: var(--mobile-background-position);
+  background-repeat: var(--mobile-background-repeat);
+}
+
+.flexItemsContainer {
+  height: var(--mobile-height);
+  justify-content: var(--mobile-justify-content);
+  align-items: var(--mobile-align-items);
+  flex-direction: var(--mobile-flex-direction);
+  gap: var(--mobile-gap);
+  flex-wrap: var(--mobile-wrap);
+  display: flex;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .flexSectionContainer {
+    background-image: var(--background-image);
+    background-color: var(--background-color);
+    aspect-ratio: var(--aspect-ratio);
+    cursor: var(--cursor);
+    width: var(--width);
+    height: var(--height);
+    margin: var(--margin);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background-size: var(--background-size);
+    background-position: var(--background-position);
+    background-repeat: var(--background-repeat);
+  }
+
+  .flexItemsContainer {
+    height: var(--height);
+    justify-content: var(--justify-content);
+    align-items: var(--align-items);
+    flex-direction: var(--flex-direction);
+    gap: var(--gap);
+    flex-wrap: var(--wrap);
+    display: flex;
+  }
+}

@@ -1,24 +1,96 @@
-import React from "react";
-
-import { ComponentConfig } from "@/core";
+import {
+  AutoField,
+  createUsePuck,
+  FieldLabel,
+  type ComponentConfig,
+} from "@measured/puck";
 import { spacingOptions } from "../../options";
-import { getClassNameFactory } from "@/core/lib";
 
-import styles from "./styles.module.css";
+import { useMemo } from "react";
+import { SpaceProps, SpaceRender } from "./space";
 
-const getClassName = getClassNameFactory("Space", styles);
-
-export type SpaceProps = {
-  direction?: "" | "vertical" | "horizontal";
-  size: string;
-};
+const usePuck = createUsePuck();
 
 export const Space: ComponentConfig<SpaceProps> = {
   label: "Space",
   fields: {
     size: {
-      type: "select",
-      options: spacingOptions,
+      type: "custom",
+      render: (props) => {
+        const {
+          onChange,
+          value,
+          field: { label = "Size" },
+        } = props;
+        const options = useMemo(() => {
+          return !value
+            ? spacingOptions
+            : [
+                ...spacingOptions,
+                ...(spacingOptions.some((option) => option.value === value)
+                  ? []
+                  : [
+                      {
+                        value: value,
+                        label: value,
+                      },
+                    ]),
+              ];
+        }, [value]);
+        return (
+          <FieldLabel label={label}>
+            <AutoField
+              field={{ type: "select", options: options }}
+              onChange={onChange}
+              value={value}
+            />
+            <AutoField
+              field={{ type: "text" }}
+              onChange={onChange}
+              value={value}
+            />
+          </FieldLabel>
+        );
+      },
+    },
+    mobileSize: {
+      type: "custom",
+      render: (props) => {
+        const {
+          onChange,
+          value,
+          field: { label = "Mobile Size" },
+        } = props;
+        const options = useMemo(() => {
+          return !value
+            ? spacingOptions
+            : [
+                ...spacingOptions,
+                ...(spacingOptions.some((option) => option.value === value)
+                  ? []
+                  : [
+                      {
+                        value: value,
+                        label: value,
+                      },
+                    ]),
+              ];
+        }, [value]);
+        return (
+          <FieldLabel label={label}>
+            <AutoField
+              field={{ type: "select", options: options }}
+              onChange={onChange}
+              value={value}
+            />
+            <AutoField
+              field={{ type: "text" }}
+              onChange={onChange}
+              value={value}
+            />
+          </FieldLabel>
+        );
+      },
     },
     direction: {
       type: "radio",
@@ -32,14 +104,28 @@ export const Space: ComponentConfig<SpaceProps> = {
   defaultProps: {
     direction: "",
     size: "24px",
+    mobileSize: "16px",
   },
   inline: true,
-  render: ({ direction, size, puck }) => {
+  resolveFields: (data, { fields }) => {
+    return fields;
+  },
+  resolveData: (data) => {
+    return data;
+  },
+  render: (props) => {
+    const { size = "24px", mobileSize = "16px", puck, ...otherProps } = props;
+
+    const isMobile = usePuck(
+      (s) => s.appState.ui.viewports.current.width < 640,
+    );
+
     return (
-      <div
-        ref={puck.dragRef}
-        className={getClassName(direction ? { [direction]: direction } : {})}
-        style={{ "--size": size } as any}
+      <SpaceRender
+        {...otherProps}
+        size={isMobile ? mobileSize : size}
+        mobileSize={isMobile ? mobileSize : size}
+        puck={puck}
       />
     );
   },

@@ -1,0 +1,99 @@
+/* Define component-scoped css properties */
+.puckTextContainer {
+  --display-desktop: initial;
+  --display-mobile: initial;
+  --display-tablet: initial;
+  --align: left;
+  --mobile-align: left;
+  --color: #000000;
+  --mobile-color: #000000;
+  --size: 16px;
+  --mobile-size: 16px;
+  --font-weight: 400;
+  --mobile-font-weight: 400;
+  --font-style: normal;
+  --mobile-font-style: normal;
+  --line-height: 1.5;
+  --mobile-line-height: 1.5;
+  --text-shadow: none;
+  --mobile-text-shadow: none;
+  --text-decoration-line: none;
+  --mobile-text-decoration-line: none;
+  --text-decoration-style: solid;
+  --mobile-text-decoration-style: solid;
+  --text-decoration-thickness: auto;
+  --mobile-text-decoration-thickness: auto;
+  --text-underline-offset: auto;
+  --mobile-text-underline-offset: auto;
+  --font-family: Arial, sans-serif;
+  --mobile-font-family: Arial, sans-serif;
+  --max-width: none;
+  --mobile-max-width: none;
+}
+
+.puckTextContainer {
+  text-align: var(--mobile-align);
+  max-width: var(--mobile-max-width);
+  display: var(--display-mobile);
+}
+
+.puckText {
+  color: var(--mobile-color);
+  font-size: var(--mobile-size);
+  font-weight: var(--mobile-font-weight);
+  font-style: var(--mobile-font-style);
+  font-family: var(--mobile-font-family);
+  text-shadow: var(--mobile-text-shadow);
+  text-decoration-line: var(--mobile-text-decoration-line);
+  text-decoration-style: var(--mobile-text-decoration-style);
+  text-decoration-thickness: var(--mobile-text-decoration-thickness);
+  text-underline-offset: var(--mobile-text-underline-offset);
+  line-height: var(--mobile-line-height);
+  text-align: var(--mobile-align);
+}
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  .puckTextContainer {
+    text-align: var(--align);
+    max-width: var(--max-width);
+    display: var(--display-tablet);
+  }
+
+  .puckText {
+    color: var(--color);
+    font-size: var(--size);
+    font-weight: var(--font-weight);
+    font-style: var(--font-style);
+    font-family: var(--font-family);
+    text-shadow: var(--text-shadow);
+    text-decoration-line: var(--text-decoration-line);
+    text-decoration-style: var(--text-decoration-style);
+    text-decoration-thickness: var(--text-decoration-thickness);
+    text-underline-offset: var(--text-underline-offset);
+    line-height: var(--line-height);
+    text-align: var(--align);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .puckTextContainer {
+    text-align: var(--align);
+    max-width: var(--max-width);
+    display: var(--display-desktop);
+  }
+
+  .puckText {
+    color: var(--color);
+    font-size: var(--size);
+    font-weight: var(--font-weight);
+    font-style: var(--font-style);
+    font-family: var(--font-family);
+    text-shadow: var(--text-shadow);
+    text-decoration-line: var(--text-decoration-line);
+    text-decoration-style: var(--text-decoration-style);
+    text-decoration-thickness: var(--text-decoration-thickness);
+    text-underline-offset: var(--text-underline-offset);
+    line-height: var(--line-height);
+    text-align: var(--align);
+  }
+}
