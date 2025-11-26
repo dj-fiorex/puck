@@ -304,7 +304,7 @@ export function PageForm({ id }: { id: string }) {
 
   const theData = {
     ...rest,
-    content: substituteTemplatesType(content, allTemplates),
+    content //substituteTemplatesType(content, allTemplates),
   };
 
   const handleSave = async (
@@ -328,10 +328,10 @@ export function PageForm({ id }: { id: string }) {
 
       ...(isDraft
         ? {
-            draftContent: substituteTemplatesType(content, allTemplates, false),
+            draftContent: content //substituteTemplatesType(content, allTemplates, false),
           }
         : {
-            content: substituteTemplatesType(content, allTemplates, false),
+            content, //substituteTemplatesType(content, allTemplates, false),
             draftContent: null,
           }),
     };

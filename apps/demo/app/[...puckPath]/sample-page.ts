@@ -1,10 +1,10 @@
 
 
-import {samplePage as eventsPage} from "./events-page";
-// import {samplePage as newsPage} from "./news-page";
+// import {samplePage as eventsPage} from "./events-page";
+import {samplePage as newsPage} from "./news-page";
 // import {samplePage as cityGuidePage} from "./city-guide-page";
 
-export const samplePage = eventsPage;
+export const samplePage = newsPage;
 
 export const sampleTempaltes = [
   {
