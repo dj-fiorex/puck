@@ -1,4 +1,4 @@
-import type { PuckComponent } from "@measured/puck";
+import type { PuckComponent } from "@puckeditor/core";
 import { merge } from "lodash";
 import { Section } from "../../components/Section";
 import styles from "./text.module.css";

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import { type PuckComponent, type Slot } from '@measured/puck';
+import { type PuckComponent, type Slot } from '@puckeditor/core';
 import { useEffect, useMemo, useRef, useState } from 'react';
 // import Swiper core and required modules
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';

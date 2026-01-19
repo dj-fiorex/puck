@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import type { PuckComponent, Slot } from '@measured/puck';
+import type { PuckComponent, Slot } from '@puckeditor/core';
 import type { CSSProperties } from 'react';
 import { Section } from '../../components/Section';
 import styles from './styles.module.css';

@@ -1,4 +1,4 @@
-import type { PuckComponent } from "@measured/puck";
+import type { PuckComponent } from "@puckeditor/core";
 import { useEffect, useRef } from "react";
 import type { FlexProps } from "../Flex/flex";
 import styles from "./flex-video.module.css";

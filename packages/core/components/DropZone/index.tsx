@@ -25,7 +25,9 @@ import {
   ComponentData,
   Config,
   DragAxis,
+  Fields,
   Metadata,
+  Overrides,
   PuckContext,
   WithPuckProps,
 } from "../../types";
@@ -44,10 +46,13 @@ import { renderContext } from "../Render";
 import { useSlots } from "../../lib/use-slots";
 import { ContextSlotRender, SlotRenderPure } from "../SlotRender";
 import { expandNode } from "../../lib/data/flatten-node";
-import { useFieldTransforms } from "../../lib/field-transforms/use-field-transforms";
+import { useFieldTransformsTracked } from "../../lib/field-transforms/use-field-transforms-tracked";
 import { getInlineTextTransform } from "../../lib/field-transforms/default-transforms/inline-text-transform";
 import { getSlotTransform } from "../../lib/field-transforms/default-transforms/slot-transform";
+import { getRichTextTransform } from "../../lib/field-transforms/default-transforms/rich-text-transform";
 import { FieldTransforms } from "../../types/API/FieldTransforms";
+import { useRichtextProps } from "../RichTextEditor/lib/use-richtext-props";
+import { MemoizeComponent } from "../MemoizeComponent";
 
 const getClassName = getClassNameFactory("DropZone", styles);
 
@@ -63,6 +68,25 @@ export type DropZoneDndData = {
   depth: number;
   path: UniqueIdentifier[];
   isDroppableTarget: boolean;
+};
+
+const InsertPreview = ({
+  element,
+  label,
+  override,
+}: {
+  element?: Element;
+  label: string;
+  override?: Overrides["drawerItem"];
+}) => {
+  if (element) {
+    return (
+      // Safe to use this since the HTML is set by the user
+      <div dangerouslySetInnerHTML={{ __html: element.outerHTML }} />
+    );
+  }
+
+  return <DrawerItemInner name={label}>{override}</DrawerItemInner>;
 };
 
 export const DropZoneEditPure = (props: DropZoneProps) => (
@@ -155,25 +179,6 @@ const DropZoneChild = ({
 
   let label = componentConfig?.label ?? item?.type.toString() ?? "Component";
 
-  const renderPreview = useMemo(
-    () =>
-      function Preview() {
-        if (item && "element" in item && item.element) {
-          return (
-            // Safe to use this since the HTML is set by the user
-            <div dangerouslySetInnerHTML={{ __html: item.element.outerHTML }} />
-          );
-        }
-
-        return (
-          <DrawerItemInner name={label}>
-            {overrides.componentItem ?? overrides.drawerItem}
-          </DrawerItemInner>
-        );
-      },
-    [componentId, label, overrides]
-  );
-
   const defaultsProps = useMemo(
     () => ({
       ...componentConfig?.defaultProps,
@@ -199,6 +204,7 @@ const DropZoneChild = ({
         <ContextSlotRender componentId={componentId} zone={slotProps.zone} />
       )),
       ...getInlineTextTransform(),
+      ...getRichTextTransform(),
       ...plugins.reduce<FieldTransforms>(
         (acc, plugin) => ({ ...acc, ...plugin.fieldTransforms }),
         {}
@@ -208,7 +214,7 @@ const DropZoneChild = ({
     [plugins, userFieldTransforms]
   );
 
-  const transformedProps = useFieldTransforms(
+  const transformedProps = useFieldTransformsTracked(
     config,
     defaultedNode,
     combinedFieldTransforms,
@@ -218,7 +224,7 @@ const DropZoneChild = ({
 
   if (!item) return;
 
-  let Render = componentConfig
+  const Render = componentConfig
     ? componentConfig.render
     : () => (
         <div style={{ padding: 48, textAlign: "center" }}>
@@ -230,10 +236,6 @@ const DropZoneChild = ({
 
   const isInserting =
     "previewType" in item ? item.previewType === "insert" : false;
-
-  if (isInserting) {
-    Render = renderPreview;
-  }
 
   return (
     <DraggableComponent
@@ -249,23 +251,38 @@ const DropZoneChild = ({
       userDragAxis={collisionAxis}
       inDroppableZone={inDroppableZone}
     >
-      {(dragRef) =>
-        componentConfig?.inline && !isInserting ? (
-          <>
-            <Render
-              {...transformedProps}
-              puck={{
-                ...transformedProps.puck,
-                dragRef,
+      {(dragRef) => {
+        if (componentConfig?.inline && !isInserting) {
+          return (
+            <MemoizeComponent
+              Component={Render}
+              componentProps={{
+                ...transformedProps,
+                puck: { ...transformedProps.puck, dragRef },
               }}
             />
-          </>
-        ) : (
+          );
+        }
+
+        return (
           <div ref={dragRef}>
-            <Render {...transformedProps} />
+            {isInserting ? (
+              <InsertPreview
+                label={label}
+                override={overrides.componentItem ?? overrides.drawerItem}
+                element={
+                  "element" in item && item.element ? item.element : undefined
+                }
+              />
+            ) : (
+              <MemoizeComponent
+                Component={Render}
+                componentProps={transformedProps}
+              />
+            )}
           </div>
-        )
-      }
+        );
+      }}
     </DraggableComponent>
   );
 };
@@ -463,6 +480,13 @@ export const DropZoneEdit = forwardRef<HTMLDivElement, DropZoneProps>(
       ref,
     });
 
+    const setRefs = useCallback(
+      (node: any) => {
+        assignRefs<any>([ref, dropRef, userRef], node);
+      },
+      [dropRef]
+    );
+
     const El = as ?? "div";
 
     return (
@@ -475,9 +499,7 @@ export const DropZoneEdit = forwardRef<HTMLDivElement, DropZoneProps>(
           hasChildren: contentIds.length > 0,
           isAnimating,
         })}${className ? ` ${className}` : ""}`}
-        ref={(node: any) => {
-          assignRefs<any>([ref, dropRef, userRef], node);
-        }}
+        ref={setRefs}
         data-testid={`dropzone:${zoneCompound}`}
         data-puck-dropzone={zoneCompound}
         style={
@@ -531,10 +553,13 @@ const DropZoneRenderItem = ({
     [props]
   );
 
+  const richtextProps = useRichtextProps(Component.fields, props);
+
   return (
     <DropZoneProvider key={props.id} value={nextContextValue}>
       <Component.render
         {...props}
+        {...richtextProps}
         puck={{
           ...props.puck,
           renderDropZone: DropZoneRenderPure,
@@ -577,7 +602,6 @@ const DropZoneRender = forwardRef<HTMLDivElement, DropZoneProps>(
     if (zoneCompound !== rootDroppableId) {
       content = setupZone(data, zoneCompound).zones[zoneCompound];
     }
-
     return (
       <El className={className} style={style} ref={ref}>
         {content.map((item) => {

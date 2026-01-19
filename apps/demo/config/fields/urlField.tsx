@@ -1,4 +1,4 @@
-import { AutoField, FieldLabel } from "@measured/puck";
+import { AutoField, FieldLabel } from "@puckeditor/core";
 import { useEffect, useState } from "react";
 import { TemplateTextEditor } from "./TemplateField/TemplateField";
 

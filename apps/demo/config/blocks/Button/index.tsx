@@ -4,7 +4,7 @@ import {
   FieldLabel,
   type ComponentConfig,
   type PuckComponent,
-} from "@measured/puck";
+} from "@puckeditor/core";
 
 import { ColorField } from "../../fields/ColorField";
 import { fontWeightField } from "../../fields/text/fontWeight";

@@ -8,6 +8,7 @@ import {
   WithPuckProps,
 } from "../../types";
 import { useSlots } from "../../lib/use-slots";
+import { useRichtextProps } from "../RichTextEditor/lib/use-richtext-props";
 
 type SlotRenderProps = DropZoneProps & {
   content: Content;
@@ -35,9 +36,12 @@ const Item = ({
     <SlotRenderPure {...slotProps} config={config} metadata={metadata} />
   )) as WithPuckProps<ComponentData["props"]>;
 
+  const richtextProps = useRichtextProps(Component.fields, props);
+
   return (
     <Component.render
       {...props}
+      {...richtextProps}
       puck={{
         ...props.puck,
         metadata: metadata || {},

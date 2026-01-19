@@ -1,4 +1,4 @@
-import { FieldLabel } from "@measured/puck";
+import { FieldLabel } from "@puckeditor/core";
 import { MediaField } from "./MediaField";
 import { TemplateTextEditor } from "./TemplateField/TemplateField";
 

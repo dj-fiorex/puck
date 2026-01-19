@@ -14,6 +14,7 @@ import {
   ComponentData,
   RootDataWithProps,
   ResolveDataTrigger,
+  RichtextField,
 } from "../types";
 import { createReducer, PuckAction } from "../reducer";
 import { getItem } from "../lib/data/get-item";
@@ -35,6 +36,7 @@ import { toRoot } from "../lib/data/to-root";
 import { generateId } from "../lib/generate-id";
 import { defaultAppState } from "./default-app-state";
 import { FieldTransforms } from "../types/API/FieldTransforms";
+import type { Editor } from "@tiptap/react";
 
 export { defaultAppState };
 
@@ -52,6 +54,7 @@ export type AppStore<
   UserConfig extends Config = Config,
   G extends UserGenerics<UserConfig> = UserGenerics<UserConfig>
 > = {
+  instanceId: string;
   state: G["UserAppState"];
   dispatch: (action: PuckAction) => void;
   config: UserConfig;
@@ -78,6 +81,7 @@ export type AppStore<
   setStatus: (status: Status) => void;
   iframe: IframeConfig;
   selectedItem?: G["UserData"]["content"][0] | null;
+  getCurrentData: () => G["UserData"]["content"][0] | G["UserData"]["root"];
   setUi: (ui: Partial<UiState>, recordHistory?: boolean) => void;
   getComponentConfig: (type?: string) => ComponentConfig | null | undefined;
   onAction?: (action: PuckAction, newState: AppState, state: AppState) => void;
@@ -87,6 +91,13 @@ export type AppStore<
   nodes: NodesSlice;
   permissions: PermissionsSlice;
   fieldTransforms: FieldTransforms;
+  currentRichText?: {
+    inlineComponentId?: string;
+    inline: boolean;
+    field: RichtextField;
+    editor: Editor;
+    id: string;
+  } | null;
 };
 
 export type AppStoreApi = StoreApi<AppStore>;
@@ -98,6 +109,7 @@ const defaultPageFields: Record<string, Field> = {
 export const createAppStore = (initialAppStore?: Partial<AppStore>) =>
   create<AppStore>()(
     subscribeWithSelector((set, get) => ({
+      instanceId: generateId(),
       state: defaultAppState,
       config: { components: {} },
       componentState: {},
@@ -118,6 +130,11 @@ export const createAppStore = (initialAppStore?: Partial<AppStore>) =>
       history: createHistorySlice(set, get),
       nodes: createNodesSlice(set, get),
       permissions: createPermissionsSlice(set, get),
+      getCurrentData: () => {
+        const s = get();
+
+        return s.selectedItem ?? s.state.data.root;
+      },
       getComponentConfig: (type?: string) => {
         const { config, selectedItem } = get();
         const rootFields = config.root?.fields || defaultPageFields;
@@ -246,7 +263,13 @@ export const createAppStore = (initialAppStore?: Partial<AppStore>) =>
           return { ...s, state, selectedItem };
         }),
       resolveComponentData: async (componentData, trigger) => {
-        const { config, metadata, setComponentLoading, permissions } = get();
+        const { config, metadata, setComponentLoading, permissions, state } =
+          get();
+        const componentId =
+          "id" in componentData.props ? componentData.props.id : "root";
+        const parentId = state.indexes.nodes[componentId]?.parentId;
+        const parentNode = parentId ? state.indexes.nodes[parentId] : null;
+        const parentData = parentNode?.data ?? null;
 
         const timeouts: Record<string, () => void> = {};
 
@@ -269,7 +292,8 @@ export const createAppStore = (initialAppStore?: Partial<AppStore>) =>
 
             timeouts[id]();
           },
-          trigger
+          trigger,
+          parentData
         );
       },
       resolveAndCommitData: async () => {

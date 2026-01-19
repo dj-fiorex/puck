@@ -1,4 +1,4 @@
-import { AutoField, FieldLabel, type ObjectField } from '@measured/puck';
+import { AutoField, FieldLabel, type ObjectField } from '@puckeditor/core';
 import { useMemo } from 'react';
 
 type BaseLayoutFieldProps = {

@@ -1,4 +1,4 @@
-import type { PuckComponent } from '@measured/puck';
+import type { PuckComponent } from '@puckeditor/core';
 import styles from './styles.module.css';
 
 export type SpaceProps = {

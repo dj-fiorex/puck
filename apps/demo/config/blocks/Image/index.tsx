@@ -1,4 +1,4 @@
-import { Field, FieldLabel, type ComponentConfig } from "@measured/puck";
+import { Field, FieldLabel, type ComponentConfig } from "@puckeditor/core";
 
 import { ColorField } from "../../fields/ColorField";
 

@@ -1,4 +1,4 @@
-import { type Config, type Data } from "@measured/puck";
+import { type Config, type Data } from "@puckeditor/core";
 import Root, { type RootProps } from "./root";
 import { Button } from "./blocks/Button";
 import { Grid } from "./blocks/Grid";

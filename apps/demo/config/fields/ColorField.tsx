@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { CustomFieldRender, FieldLabel } from "@measured/puck";
+import { CustomFieldRender, FieldLabel } from "@puckeditor/core";
 import { Button } from "../../app/app/_components/ui/button";
 import { Delete } from "lucide-react";
 import { ChromePicker, ColorResult } from "react-color";

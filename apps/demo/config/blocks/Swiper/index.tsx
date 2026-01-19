@@ -1,4 +1,4 @@
-import { FieldLabel, type ComponentConfig } from "@measured/puck";
+import { FieldLabel, type ComponentConfig } from "@puckeditor/core";
 import { Button } from "../../../app/app/_components/ui/button";
 import { v4 as uuidv4 } from "uuid";
 

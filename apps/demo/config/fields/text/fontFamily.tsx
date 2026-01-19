@@ -1,4 +1,4 @@
-import { FieldLabel, AutoField } from "@measured/puck";
+import { FieldLabel, AutoField } from "@puckeditor/core";
 import { useEffect, useMemo } from "react";
 
 export const fontFamilyField = {

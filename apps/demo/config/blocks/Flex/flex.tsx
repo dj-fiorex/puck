@@ -1,4 +1,4 @@
-import type { PuckComponent, Slot } from '@measured/puck';
+import type { PuckComponent, Slot } from '@puckeditor/core';
 import { Section } from '../../components/Section';
 import styles from './flex.module.css';
 

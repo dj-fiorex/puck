@@ -2,7 +2,7 @@ import {
   createUsePuck,
   FieldLabel,
   type ComponentConfig,
-} from "@measured/puck";
+} from "@puckeditor/core";
 
 import { TemplateTextEditor } from "../../fields/TemplateField/TemplateField";
 import { transformText } from "../../fields/TemplateField/lib/template-renderer";

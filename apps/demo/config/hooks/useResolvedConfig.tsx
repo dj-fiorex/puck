@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { puckBaseConfig } from "../puckBaseConfig";
 
-import type { PuckComponent, Slot } from "@measured/puck";
+import type { PuckComponent, Slot } from "@puckeditor/core";
 
 import { withLayout } from "../decorators/withLayout";
 

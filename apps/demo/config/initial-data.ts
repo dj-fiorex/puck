@@ -8,11 +8,11 @@ export const initialData: Record<string, UserData> = {
         props: {
           title: "This page was built with Puck",
           description:
-            "Puck is the self-hosted visual editor for React. Bring your own components and make site changes instantly, without a deploy.",
+            "<p>Puck is the self-hosted visual editor for React. Bring your own components and make site changes instantly, without a deploy.</p>",
           buttons: [
             {
               label: "Visit GitHub",
-              href: "https://github.com/measuredco/puck",
+              href: "https://github.com/puckeditor/puck",
             },
             { label: "Edit this page", href: "/edit", variant: "secondary" },
           ],
@@ -372,7 +372,7 @@ export const initialData: Record<string, UserData> = {
               type: "Button",
               props: {
                 label: "Visit GitHub",
-                href: "https://github.com/measuredco/puck",
+                href: "https://github.com/puckeditor/puck",
                 variant: "primary",
                 id: "Button-bd41007c-6627-414d-839a-e261d470d8f9",
               },

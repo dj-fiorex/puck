@@ -1,4 +1,4 @@
-import { createUsePuck, type ComponentConfig } from "@measured/puck";
+import { createUsePuck, type ComponentConfig } from "@puckeditor/core";
 
 import { ColorField } from "../../fields/ColorField";
 

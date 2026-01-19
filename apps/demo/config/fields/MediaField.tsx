@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { CustomFieldRender, FieldLabel, type FieldProps } from "@measured/puck";
+import { CustomFieldRender, FieldLabel, type FieldProps } from "@puckeditor/core";
 
 import { ImageIcon, Video, X } from "lucide-react";
 import { useEffect, useState } from "react";

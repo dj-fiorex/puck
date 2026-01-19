@@ -1,4 +1,4 @@
-import { Field, type ComponentConfig } from "@measured/puck";
+import { Field, type ComponentConfig } from "@puckeditor/core";
 
 import { withExport } from "../../decorators/withExport";
 import { withAdminLayout } from "../../decorators/withAdminLayout";

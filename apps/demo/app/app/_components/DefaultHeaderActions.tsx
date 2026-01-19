@@ -1,5 +1,5 @@
 "use client";
-import { createUsePuck } from "@measured/puck";
+import { createUsePuck } from "@puckeditor/core";
 
 
 import { useState } from "react";

@@ -1,3 +1,4 @@
+import { ReactElement, ReactNode } from "react";
 import { PuckAction } from "../../reducer";
 import { WithDeepSlots } from "../Internal";
 import { DefaultComponentProps } from "../Props";
@@ -27,8 +28,13 @@ export type OnAction<UserData extends Data = Data> = (
 ) => void;
 
 export type Plugin<UserConfig extends Config = Config> = {
+  name?: string;
+  label?: string;
+  icon?: ReactNode;
+  render?: () => ReactElement;
   overrides?: Partial<Overrides<UserConfig>>;
   fieldTransforms?: FieldTransforms<UserConfig>;
+  mobilePanelHeight?: "toggle" | "min-content";
 };
 
 export type History<D = any> = {
@@ -68,6 +74,8 @@ export type WithSlotProps<
   Components extends DefaultComponents = DefaultComponents,
   SlotType extends Content<Components> = Content<Components>
 > = WithDeepSlots<Target, SlotType>;
+
+export type RichText = string | ReactNode;
 
 export * from "./DropZone";
 export * from "./Viewports";

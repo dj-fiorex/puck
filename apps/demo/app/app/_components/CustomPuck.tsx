@@ -1,5 +1,5 @@
 "use client";
-import { AutoField, type Config, Puck } from "@measured/puck";
+import { AutoField, type Config, Puck } from "@puckeditor/core";
 
 import {
   Accordion,

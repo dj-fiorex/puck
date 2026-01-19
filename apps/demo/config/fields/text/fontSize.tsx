@@ -1,4 +1,4 @@
-import { FieldLabel, AutoField } from "@measured/puck";
+import { FieldLabel, AutoField } from "@puckeditor/core";
 import { useMemo } from "react";
 
 // Assuming "m" (medium) = 16px, and scaling up/down typically by a factor (commonly 1.25 or 1.333)

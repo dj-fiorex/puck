@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { CustomFieldRender, FieldLabel, Button } from "@measured/puck";
+import { CustomFieldRender, FieldLabel, Button } from "@puckeditor/core";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import ConstrainedEditor from "./ConstrainedEditor";

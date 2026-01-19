@@ -12,7 +12,7 @@
  * @returns The decorated block configuration with export functionality.
  */
 
-import type { ComponentConfig, DefaultComponentProps } from "@measured/puck";
+import type { ComponentConfig, DefaultComponentProps } from "@puckeditor/core";
 
 export type WithExport<Props extends DefaultComponentProps> = Props & {
   export: boolean;

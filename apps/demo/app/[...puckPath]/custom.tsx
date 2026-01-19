@@ -11,60 +11,9 @@ const CustomPuck = dynamic(() => import("../app/_components/CustomPuck"), {
 
 // import { CustomPuck } from "@/app/_components/puck/CustomPuck";
 
-import { PuckAction } from "@measured/puck";
+import { PuckAction } from "@puckeditor/core";
 
 import { useResolvedConfig } from "../../config/hooks/useResolvedConfig";
-
-/**
- * Substitutes template type identifiers in a content object by adding or removing the "TMP-" prefix.
- *
- * This function performs a bidirectional transformation on template type identifiers within a JSON-serializable
- * content object. It can either remove the "TMP-" prefix (when reading from database) or add it (when preparing
- * data for storage).
- *
- * @param content - The content object containing template references with type properties to be transformed.
- *                  This can be any JSON-serializable object structure.
- * @param allTemplates - An array of template objects, each containing a `name` property with the format "TMP-<templateType>".
- *                       These templates are used to determine which type identifiers should be transformed.
- * @param fromDb - A boolean flag indicating the direction of transformation:
- *                 - `true` (default): Removes "TMP-" prefix from type identifiers (database → application format)
- *                 - `false`: Adds "TMP-" prefix to type identifiers (application → database format)
- *
- * @returns A new object with transformed template type identifiers. The returned object is a deep copy
- *          of the input content with modified type properties.
- * @remarks
- * - The function uses JSON serialization/deserialization internally, so the input must be JSON-serializable
- * - All occurrences of matching type patterns will be replaced throughout the nested structure
- * - Template names in the `allTemplates` array must follow the "TMP-<templateType>" naming convention
- */
-const substituteTemplatesType = (
-  content: any,
-  allTemplates: any[],
-  fromDb = true
-) => {
-  const allTemplatesType = allTemplates.map((t) =>
-    t.name.replaceAll("TMP-", "")
-  );
-
-  // Substitute <template.type> with TMP-<template.type>
-  let str = JSON.stringify(content);
-
-  for (const templateType of allTemplatesType) {
-    if (fromDb) {
-      str = str.replaceAll(
-        `"type":"TMP-${templateType}"`,
-        `"type":"${templateType}"`
-      );
-    } else {
-      str = str.replaceAll(
-        `"type":"${templateType}"`,
-        `"type":"TMP-${templateType}"`
-      );
-    }
-  }
-
-  return JSON.parse(str);
-};
 
 const fields = {
   //name: { type: "text" },
@@ -304,7 +253,7 @@ export function PageForm({ id }: { id: string }) {
 
   const theData = {
     ...rest,
-    content //substituteTemplatesType(content, allTemplates),
+    content, //substituteTemplatesType(content, allTemplates),
   };
 
   const handleSave = async (
@@ -328,7 +277,7 @@ export function PageForm({ id }: { id: string }) {
 
       ...(isDraft
         ? {
-            draftContent: content //substituteTemplatesType(content, allTemplates, false),
+            draftContent: content, //substituteTemplatesType(content, allTemplates, false),
           }
         : {
             content, //substituteTemplatesType(content, allTemplates, false),

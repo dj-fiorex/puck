@@ -1,8 +1,8 @@
-import { type ComponentConfig } from "@measured/puck";
+import { type ComponentConfig } from "@puckeditor/core";
 
 import { FlexVideoRender } from "./flex-video";
 
-import { createUsePuck } from "@measured/puck";
+import { createUsePuck } from "@puckeditor/core";
 import { srcField } from "../../fields/srcField";
 import { useMemo } from "react";
 import { merge } from "lodash";

@@ -3,7 +3,7 @@ import {
   createUsePuck,
   FieldLabel,
   type ComponentConfig,
-} from "@measured/puck";
+} from "@puckeditor/core";
 import { spacingOptions } from "../../options";
 
 import { useMemo } from "react";

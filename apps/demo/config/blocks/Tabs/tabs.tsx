@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import type { PuckComponent, Slot } from "@measured/puck";
+import type { PuckComponent, Slot } from "@puckeditor/core";
 import { useEffect, useState } from "react";
 import styles from "./tabs.module.css";
 

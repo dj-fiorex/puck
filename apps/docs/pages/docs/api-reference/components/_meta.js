@@ -3,6 +3,7 @@ const menu = {
   "action-bar-action": {},
   "action-bar-group": {},
   "action-bar-label": {},
+  "action-bar-separator": {},
   "auto-field": {},
   drawer: {},
   "drawer-item": {},
@@ -11,9 +12,13 @@ const menu = {
   puck: {},
   "puck-components": {},
   "puck-fields": {},
+  "puck-layout": {},
   "puck-outline": {},
   "puck-preview": {},
   render: {},
+  "rich-text-menu": {},
+  "rich-text-menu-group": {},
+  "rich-text-menu-control": {},
 };
 
 export default menu;

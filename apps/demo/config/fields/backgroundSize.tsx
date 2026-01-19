@@ -1,4 +1,4 @@
-import { AutoField, Field, FieldLabel } from "@measured/puck";
+import { AutoField, Field, FieldLabel } from "@puckeditor/core";
 import { useMemo } from "react";
 
 const backgroundSizeOptions = [
