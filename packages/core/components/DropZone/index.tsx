@@ -204,7 +204,17 @@ const DropZoneChild = ({
   const combinedFieldTransforms = useMemo(
     () => ({
       ...getSlotTransform(DropZoneEditPure, (slotProps) => (
-        <ContextSlotRender componentId={componentId} zone={slotProps.zone} />
+        <ContextSlotRender
+          componentId={componentId}
+          zone={slotProps.zone}
+          as={slotProps.as}
+          className={slotProps.className}
+          style={slotProps.style}
+          allow={slotProps.allow}
+          disallow={slotProps.disallow}
+          minEmptyHeight={slotProps.minEmptyHeight}
+          collisionAxis={slotProps.collisionAxis}
+        />
       )),
       ...getInlineTextTransform(),
       ...getRichTextTransform(),

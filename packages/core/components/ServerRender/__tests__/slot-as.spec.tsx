@@ -42,7 +42,6 @@ describe("Slot as prop in Render contexts", () => {
 
   it("ServerRender: respects the `as` prop passed to a Slot component", () => {
     const html = renderToString(<ServerRender config={config} data={data} />);
-    console.log("HTML:", html);
     expect(html).toContain("<ul");
     expect(html).not.toContain("<div");
   });

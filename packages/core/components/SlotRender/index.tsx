@@ -3,15 +3,22 @@
 import { useShallow } from "zustand/react/shallow";
 import { useAppStore } from "../../store";
 import { SlotRenderPure } from "./server";
+import { DropZoneProps } from "../DropZone/types";
 export * from "./server";
 
 export const ContextSlotRender = ({
   componentId,
   zone,
+  as,
+  className,
+  style,
+  allow,
+  disallow,
+  minEmptyHeight,
+  collisionAxis,
 }: {
   componentId: string;
-  zone: string;
-}) => {
+} & DropZoneProps) => {
   const config = useAppStore((s) => s.config);
   const metadata = useAppStore((s) => s.metadata);
   const slotContent = useAppStore(
@@ -31,6 +38,13 @@ export const ContextSlotRender = ({
       zone={zone}
       config={config}
       metadata={metadata}
+      as={as}
+      className={className}
+      style={style}
+      allow={allow}
+      disallow={disallow}
+      minEmptyHeight={minEmptyHeight}
+      collisionAxis={collisionAxis}
     />
   );
 };

@@ -117,6 +117,62 @@ describe("Puck", () => {
     expect(appStore.getState()).toMatchSnapshot();
   });
 
+  it("should respect `as` prop on a slot while the component is loading (read-only mode)", async () => {
+    const gridRender = jest.fn((props: any) => {
+      const { items: Items, as } = props;
+      return <Items as={as} className="slot-wrapper" />;
+    });
+
+    render(
+      <Puck
+        config={{
+          components: {
+            Grid: {
+              fields: {
+                items: { type: "slot" },
+                as: { type: "text" },
+              },
+              render: gridRender,
+            },
+            Child: {
+              fields: {},
+              render: () => <span>child</span>,
+            },
+          },
+        }}
+        data={{
+          content: [
+            {
+              type: "Grid",
+              props: {
+                id: "grid-1",
+                as: "ul",
+                items: [{ type: "Child", props: { id: "child-1" } }],
+              },
+            },
+          ],
+        }}
+        iframe={{ enabled: false }}
+      />
+    );
+
+    await flush();
+
+    const { appStore } = getInternal();
+
+    // Simulate loading state — forces all slots to use ContextSlotRender (isReadOnly = true)
+    act(() => {
+      appStore.getState().setComponentState({ "grid-1": { loadingCount: 1 } });
+    });
+
+    await flush();
+
+    // The slot wrapper must honour `as="ul"`, not fall back to `<div>`
+    const slotEl = document.querySelector(".slot-wrapper");
+    expect(slotEl).not.toBeNull();
+    expect(slotEl!.tagName.toLowerCase()).toBe("ul");
+  });
+
   it("should index slots on mount", async () => {
     render(
       <Puck

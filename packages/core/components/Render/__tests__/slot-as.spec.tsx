@@ -65,7 +65,6 @@ describe("Client-side Render: Slot as prop", () => {
             "--num-columns": numColumns,
           } as React.CSSProperties;
 
-          console.log("Grid render - as:", as);
           return (
             <Items as={as} className="grid-class" style={cssProps} />
           );
@@ -134,7 +133,6 @@ describe("Client-side Render: Slot as prop", () => {
 
   it("Slot wrapper renders as 'ul' when as='ul' is passed", () => {
     const { container } = render(<Render config={config} data={data} />);
-    console.log("HTML:", container.innerHTML);
 
     // The slot wrapper should be <ul>, NOT <div>
     const gridEl = container.querySelector(".grid-class");
